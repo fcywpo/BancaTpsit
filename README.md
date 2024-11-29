@@ -5,7 +5,7 @@
 - alvise sacconato
 - alessandro zago
 
-## Versione: 1.0
+## Versione: 1.1
 
 ## Panoramica
 - Questo programma simula un sistema bancario monoutente, permettendo all'utente di gestire un conto bancario con diverse funzionalità, tra cui prelievo, deposito e opzioni di investimento. Gli investimenti sono disponibili in tre durate diverse: breve termine, medio termine e lungo termine. Inoltre, il sistema offre tre livelli di rischio per gli investimenti: basso rischio/basso guadagno, rischio medio/guadagno medio e alto rischio/alto guadagno.

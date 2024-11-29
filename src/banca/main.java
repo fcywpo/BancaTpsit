@@ -1,7 +1,7 @@
 /*
  *@author  alvise sacconato
  *@author2 alessandro zago
- *@version 1.0
+ *@version 1.2
  *@description tramite questo programma si puo' gestire una banca monoutente con opzioni di prelievo, deposito,
  *			   investimento con diversi tipi di durata ovvero: breve media e lunga e con diversi tipi di rischio,
  *			   ovvero: basso rischio/guadagno, medio rischio/guadagno e alto rischio/guadagno, permette di avanzare di tempo (mesi),
@@ -11,18 +11,8 @@
 package banca;
 import java.util.Scanner;
 
-// -- COSE DA FARE -- // 
-// USARE GLI INTERS E I FORMATTERS PER LA LEGGIBILITA' DEL CODICE E LE ALTRE COSE RICHIESTE SU CLASSROOM
-
-
-// Volendo si puo' aggiungere che prima di fare "Accedi al conto corrente" devi registrati con: nome, cognome, email e password.
-// Volendo si puo' farla multiutente (si puo' farlo anche con solo i "metodi" come stiamo facendo ora oppure con gli oggetti.
-// Volendo trasformare questo programma con gli oggetti.
-
-// -- FINE COSE DA FARE -- //
-
 public class main {
-
+	
 	// Racchiude il try del MenuIniziale, del MenuBanca, del menu Investimento durata e rischio
 	public static short TryMenu(int min, int max) {
 		Scanner tastiera = new Scanner(System.in);
@@ -48,7 +38,10 @@ public class main {
 		return selezione;
 	}
 	
-	// Menu iniziale di avvio del programma
+	/**
+	 * Menu iniziale di avvio del programma
+	 * @return -- Ritorna la decisione prese dall'utente 
+	 */
 	public static short MenuIniziale() {
 		System.out.println("BENVENUTO NELLA BANCA!");
 		System.out.println("Cosa desideri fare?\n");
@@ -62,7 +55,11 @@ public class main {
 		return selezione;
 	}
 	
-	// Menu per fare le operazioni in banca
+	/**
+	 * Menu per scegliere l'operazione da fare con la banca
+	 * @param Utente -- Vettore utente
+	 * @return -- Ritorna l'operazione della banca che vuole fare l'utente 
+	 */
 	public static short MenuBanca(String Utente[]) {
 		Scanner tastiera = new Scanner(System.in);
 		
@@ -81,7 +78,11 @@ public class main {
 		return selezione;
 	}
 	
-	// Metodo inserimento Nome e Password
+	/**
+	 * Metodo per inserire le  credenziali di accesso (nome utente e password)
+	 * @param Utente -- Vettore utente
+	 * @param NameOrPassword -- Serve per indicare se si vuole inserire il nome[0] o la password[1]
+	 */
 	public static void Utente(String Utente[], int NameOrPassword) {
 		Scanner tastiera = new Scanner(System.in);
 
@@ -109,21 +110,30 @@ public class main {
                 tastiera.next(); // Salta tasto "invio" nel buffer
 			}
 		}
-		
 		if(isPassword = true) {
 			System.out.println("ATTENZIONE!! ricordati la password! \nPremi un tasto per continuare... \n");
 		}
 	}
 	
-	// Stampa informazioni sul conto corrente dell'utente
+	/**
+	 * Metodo per visualizzare le informazione dell'utente in banca (Nome, Soldi nel conto e portafoglio, mesi trascorsi)
+	 * @param Utente -- Vettore utente
+	 * @param Soldi -- Serve per far vedere soldi in banca[0] o nel portafoglio[1]
+	 * @param ContatoreMesi -- Tiene conto dei mesi trascorsi da quando è entrato nella banca
+	 */
 	public static void InfoConto(String Utente[], double Soldi[], int ContatoreMesi) {
 		System.out.println("Nome: " + Utente[0]);
 		System.out.println("Saldo in banca: " + Soldi[0]);
 		System.out.println("Saldo nel portafoglio: " + Soldi[1]);
 		System.out.println("Mesi trascorsi dall'appertura del conto: " + ContatoreMesi + "\n");
 	}
-	
-	// Genera cose random
+
+	/**
+	 * Metodo per generare un numero random, cosi da randomizzare alcuni eventi, come saldo iniziale e le probabilita
+	 * @param max -- Valore massimo del random
+	 * @param min -- Valore minimo del random
+	 * @return -- Ritorna un numero random compreso tra i valori richiesti prima
+	 */
 	public static double GeneraRandom(double max, double min) {
 		//double gen = min + (Math.random() * (max - min)); // Genera il numero random
         //double random = Math.round(gen * 100.0) / 100.0; // Lascia solo 2 cifre decimali
@@ -133,7 +143,7 @@ public class main {
 		return random;
 	}
 	
-	// Metodo per chiedere la password
+	//Metodo per verificare la password inserita dall'utente
 	public static void ChiediPassword(String Utente[]) {
 		Scanner tastiera = new Scanner(System.in);
 		String scelta;
@@ -179,25 +189,34 @@ public class main {
 		return SoldiInseriti;
 	}
 	
-	// Metodo per depositare i soldi nel conto corrente
+	/**
+	 * Metodo che permettere di depositare i soldi in banca dal portafoglio
+	 * @param Soldi -- Vettore soldi
+	 */
 	public static void DepositoSoldi(double Soldi[]) {
-		double SoldiInseriti = DepositoRitiro(Soldi, 0);  // 0 se sono da depositare 1 se sono da ritirare
+		double SoldiInseriti = DepositoRitiro(Soldi, 0);  // 0 (banca) se sono da depositare 1 (portafoglio) se sono da ritirare
 		
 		Soldi[0] = Soldi[0] + SoldiInseriti;
 		Soldi[1] = Soldi[1] - SoldiInseriti;
 		System.out.println("Hai depositato: " + SoldiInseriti + "€");
 	}
 	
-	// Metodo per prelevare i soldi dal conto corrente
+	//Metodo che permettere di prelevare soldi dalla banca
 	public static void PrelievoSoldi(double Soldi[]) {
-		double SoldiInseriti = DepositoRitiro(Soldi, 1);  // 0 se sono da depositare 1 se sono da ritirare
+		double SoldiInseriti = DepositoRitiro(Soldi, 1);  // 0 (banca) se sono da depositare 1 (portafoglio) se sono da ritirare
 		
 		Soldi[1] = Soldi[1] + SoldiInseriti;
 		Soldi[0] = Soldi[0] - SoldiInseriti;
 		System.out.println("Hai ritirato: " + SoldiInseriti + "€");
 	}
 
-	// Metodo che permette di andare avanti di un mese nella vita del conto corrente
+	/**
+	 * Metodo che permette di andare avanti di n mesi 
+	 * @param ContatoreMesi -- Contatore mesi
+	 * @param Soldi -- Vettore soldi
+	 * @param MesiDaAggiungere -- Passa il numero di mesi che si vuole andare avanti
+	 * @return ContatoreMesi -- Ritorna il contatore dei mesi aggiornato
+	 */
 	public static int AvanzaMesi(int ContatoreMesi, double Soldi[], int MesiDaAggiungere) {
 		Scanner tastiera = new Scanner(System.in);
 		
@@ -348,7 +367,7 @@ public class main {
 							InfoConto(Utente, Soldi, ContatoreMesi);
 						}
 						
-						// Gestione delle opzioni visionate nel menu
+						// Gestione delle opzioni visionate nel menu "operazioni"
 						switch(selezione2) {
 							case 1:{
 								InfoConto(Utente, Soldi, ContatoreMesi);
@@ -369,11 +388,10 @@ public class main {
 								Investimento(Soldi, ContatoreMesi);
 								break;
 							}
-							case 5:{
+							case 5:{ // Permette di uscire da questo sotto_menu
 								ChiediPassword(Utente);
 								
 							    System.out.println("Sei sicuro di voler continuare? (Y = si, N = no)");
-								
 							    String scelta = tastiera.next();
 				
 							    if (scelta.equalsIgnoreCase("Y")) {
@@ -384,11 +402,8 @@ public class main {
 							    
 							    break;
 							}
-							case 0:{
-								// Fa uscire da questo switch (sotto menu) (gestione conto corrente)
-								
+							case 0:{ // Fa uscire da questo switch (sotto menu) (gestione conto corrente)
 							    System.out.println("Sei sicuro di voler uscire? (Y = si, N = no)");
-								
 							    String scelta = tastiera.next();
 				
 							    if (scelta.equalsIgnoreCase("Y")) {
@@ -403,11 +418,8 @@ public class main {
 					}
 					break;
 				}
-				case 0:{
-					// Fa chiudere il programma
-					
+				case 0:{ // Fa chiudere il programma
 				    System.out.println("Sei sicuro di voler uscire? (Y = si, N = no)");
-	
 				    String scelta = tastiera.next();
 	
 				    if (scelta.equalsIgnoreCase("Y")) {
@@ -416,7 +428,7 @@ public class main {
 				    }else {
 				        System.out.println("Hai scelto di non uscire!");
 				    }
-	
+
 				    break;
 				}
 			}
