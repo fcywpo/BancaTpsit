@@ -23,4 +23,4 @@
 - Informazioni sul conto: Visualizza i dettagli sul saldo del conto corrente, gli investimenti e la cronologia delle transazioni.
 
 ## LICENZA
-- source code no lucrare/divulgare
+- sourcecode free
