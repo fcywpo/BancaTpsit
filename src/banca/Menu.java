@@ -1,5 +1,8 @@
+package banca;
+
 // Classe per il menu 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 // Classe per il menu interattivo
 class Menu {
@@ -11,7 +14,7 @@ class Menu {
     }
 
     public static short menuBanca() {
-        System.out.println("1. Deposita\n2. Preleva\n3. Mostra Saldo\n4. Avanza di X mesi\n5. Esci");
+        System.out.println("1. Deposita\n2. Preleva\n3. Mostra Saldo\n4. Avanza di X mesi\n5.Fai un investimento\n0. Esci");
         return getShortInput();
     }
 

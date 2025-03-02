@@ -1,3 +1,5 @@
+package banca;
+
 // Classe per la gestione del conto bancario
 class ContoBancario {
     private double saldoBanca;
@@ -9,11 +11,13 @@ class ContoBancario {
     }
 
     public void deposita(double importo) {
-        if (importo > 0) {
+        if (importo > 0 && importo <= saldoPortafoglio) {//Sistemare fatto che non inserisce soldi in banca dopo investimento 
             saldoBanca += importo;
-            System.out.println("Deposito effettuato. Nuovo saldo: " + saldoBanca);
+            saldoPortafoglio -= importo; 
+            System.out.println("Deposito effettuato. Nuovo saldo banca: " + saldoBanca);
+            System.out.println("Saldo portafoglio rimanente: " + saldoPortafoglio);
         } else {
-            System.out.println("Importo non valido.");
+            System.out.println("Importo non valido o fondi insufficienti nel portafoglio.");
         }
     }
 
@@ -35,10 +39,15 @@ class ContoBancario {
 
     public void avanzaMesi(int mesi) {
         if (mesi > 0) {
-            saldoBanca += mesi * 100;
-            System.out.println("Sono passati " + mesi + " mesi. Nuovo saldo: " + saldoBanca);
+            saldoPortafoglio += mesi * 100;
+            System.out.println("Sono passati " + mesi + " mesi. Nuovo saldo: " + saldoPortafoglio);
         } else {
             System.out.println("Numero di mesi non valido.");
         }
     }
+
+    public double getSaldoBanca() {
+        return this.saldoBanca;
+    }
+
 }

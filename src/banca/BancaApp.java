@@ -1,13 +1,18 @@
+package banca;
+
 // Classe principale
 
 import java.util.Scanner;
-import java.util.InputMismatchException;
+
 
 public class BancaApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Utente utente = new Utente("Pippo", "1234");
         ContoBancario conto = new ContoBancario(1000, 100);
+        Investimento investimento = new Investimento();
+
+       // Menu.menuIniziale();
 
         System.out.print("Inserisci password: ");
         String password = scanner.nextLine();
@@ -38,6 +43,9 @@ public class BancaApp {
                     conto.avanzaMesi(mesi);
                     break;
                 case 5:
+                     investimento.avviaInvestimento(conto);
+                    break;
+                case 0:
                     esci = true;
                     break;
                 default:

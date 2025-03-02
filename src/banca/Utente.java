@@ -1,3 +1,5 @@
+package banca;
+
 // Classe per la gestione dell'utente
 class Utente {
     private String nome;
