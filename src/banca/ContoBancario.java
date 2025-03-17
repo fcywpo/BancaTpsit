@@ -11,13 +11,21 @@ class ContoBancario {
     }
 
     public void deposita(double importo) {
-        if (importo > 0 && importo <= saldoPortafoglio) {//Sistemare fatto che non inserisce soldi in banca dopo investimento 
+        if (importo > 0 && importo <= saldoPortafoglio) { 
             saldoBanca += importo;
             saldoPortafoglio -= importo; 
             System.out.println("Deposito effettuato. Nuovo saldo banca: " + saldoBanca);
             System.out.println("Saldo portafoglio rimanente: " + saldoPortafoglio);
         } else {
             System.out.println("Importo non valido o fondi insufficienti nel portafoglio.");
+        }
+    }
+
+    public void guadagnoInvestimento(double guadagno) {
+        if (guadagno > 0) {
+            saldoPortafoglio += guadagno;
+            System.out.println("Guadagno accreditato nel portafoglio. Nuovo saldo: " + saldoPortafoglio);
+            deposita(guadagno);
         }
     }
 

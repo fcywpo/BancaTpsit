@@ -49,7 +49,8 @@ class Investimento {
 
         System.out.println("Investimento completato! Guadagno: " + guadagno);
 
-        conto.deposita(guadagno);//fare modo che me li butti direttamente
+
+        conto.guadagnoInvestimento(guadagno);
 
         if (guadagno > 0) {
             System.out.println("Congratulazioni, hai vinto! Guadagno positivo.");

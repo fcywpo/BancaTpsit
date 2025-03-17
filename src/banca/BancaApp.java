@@ -8,19 +8,47 @@ import java.util.Scanner;
 public class BancaApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Utente utente = new Utente("Pippo", "1234");
-        ContoBancario conto = new ContoBancario(1000, 100);
+   
+         // Gestione degli utenti
+         Utente utente = null;
+         ContoBancario conto = null;
+ 
+         boolean esegui = true;
+         while (esegui) {
+             short scelta = Menu.menuIniziale();
+             switch (scelta) {
+                 case 1: 
+                     GestioneUtenti.registraUtente();
+                     break;
+ 
+                 case 2: 
+                     if (GestioneUtenti.login()) {
+                         utente = GestioneUtenti.getUtenteAutenticato();
+                         conto = utente.getConto();
+                         menuBanca();
+                     }
+                     break;
+ 
+                 case 3: 
+                     System.out.println("Uscita dal sistema.");
+                     esegui = false;
+                     break;
+ 
+                 default:
+                     System.out.println("Scelta non valida.");
+             }
+         }
+ 
+         scanner.close();
+     }
+
+        
+      // Gestisce il menu bancario una volta che l'utente è loggato
+    private static void menuBanca() {
+        Utente utente = GestioneUtenti.getUtenteAutenticato();
+        ContoBancario conto = utente.getConto();
         Investimento investimento = new Investimento();
 
-       // Menu.menuIniziale();
-
-        System.out.print("Inserisci password: ");
-        String password = scanner.nextLine();
-
-        if (!utente.verificaPassword(password)) {
-            System.out.println("Accesso negato.");
-            return;
-        }
 
         boolean esci = false;
         while (!esci) {
@@ -38,20 +66,21 @@ public class BancaApp {
                     conto.mostraSaldo();
                     break;
                 case 4:
-                    System.out.print("Quanti mesi vuoi far avanzare? ");
-                    int mesi = Menu.menuBanca();
-                    conto.avanzaMesi(mesi);
-                    break;
+                System.out.print("Quanti mesi vuoi far avanzare? ");
+                int mesi = Menu.getShortInput();  
+                conto.avanzaMesi(mesi);
+                break;
                 case 5:
                      investimento.avviaInvestimento(conto);
                     break;
                 case 0:
-                    esci = true;
+                    GestioneUtenti.logout();
+                    esci=false;
                     break;
                 default:
                     System.out.println("Scelta non valida.");
             }
         }
-        scanner.close();
+        
     }
 }
