@@ -4,10 +4,11 @@ package banca;
 
 import java.util.Scanner;
 
-
 public class BancaApp {
+    private static final String FILE_DATI = "dati_banca.dat";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        GestioneUtenti.caricaDatiDaFile(FILE_DATI);
    
          // Gestione degli utenti
          Utente utente = null;
@@ -31,6 +32,7 @@ public class BancaApp {
  
                  case 3: 
                      System.out.println("Uscita dal sistema.");
+                     GestioneUtenti.salvaDatiSuFile(FILE_DATI);
                      esegui = false;
                      break;
  
@@ -73,9 +75,12 @@ public class BancaApp {
                 case 5:
                      investimento.avviaInvestimento(conto);
                     break;
+                case 6:
+                    conto.visualizzaStorico();
+                break;
                 case 0:
                     GestioneUtenti.logout();
-                    esci=false;
+                    esci=true;
                     break;
                 default:
                     System.out.println("Scelta non valida.");

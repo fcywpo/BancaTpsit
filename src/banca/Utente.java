@@ -1,7 +1,9 @@
 package banca;
 
+import java.io.Serializable;
+
 // Classe per la gestione dell'utente
-class Utente {
+class Utente implements Serializable {
     private String nome;
     private String password;
     private ContoBancario conto;

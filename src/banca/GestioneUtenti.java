@@ -1,5 +1,10 @@
 package banca;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -57,6 +62,24 @@ public class GestioneUtenti {
     // Metodo per ottenere l'utente attualmente loggato
     public static Utente getUtenteAutenticato() {
         return utenteAutenticato;
+    }
+
+    public static void salvaDatiSuFile(String nomeFile) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(nomeFile))) {
+            out.writeObject(utenti);
+            System.out.println("Dati salvati con successo.");
+        } catch (IOException e) {
+            System.out.println("Errore nel salvataggio dei dati.");
+        }
+    }
+
+    public static void caricaDatiDaFile(String nomeFile) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nomeFile))) {
+            utenti = (HashMap<String, Utente>) in.readObject();
+            System.out.println("Dati caricati con successo.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Nessun dato precedente trovato, avvio con nuova banca.");
+        }
     }
 }
 
