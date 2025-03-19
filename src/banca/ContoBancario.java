@@ -71,6 +71,9 @@ class ContoBancario implements Serializable{
     public double getSaldoBanca() {
         return this.saldoBanca;
     }
+    public double getSaldoPortafoglio() {
+        return this.saldoPortafoglio;
+    }
     public Vector<String> getStoricoTransazioni() {
         return storicoTransazioni;
     }

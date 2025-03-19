@@ -77,6 +77,7 @@ public class GestioneUtenti {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nomeFile))) {
             utenti = (HashMap<String, Utente>) in.readObject();
             System.out.println("Dati caricati con successo.");
+
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Nessun dato precedente trovato, avvio con nuova banca.");
         }
