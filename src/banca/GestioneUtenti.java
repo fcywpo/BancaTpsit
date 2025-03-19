@@ -81,5 +81,22 @@ public class GestioneUtenti {
             System.out.println("Nessun dato precedente trovato, avvio con nuova banca.");
         }
     }
+    public static boolean login(String nome, String password) {
+        Utente utente = utenti.get(nome);
+        if (utente != null && utente.verificaPassword(password)) {
+            utenteAutenticato = utente;
+            return true;
+        }
+        return false;
+    }
+    public static boolean registraUtente(String nome, String password) {
+        if (utenti.containsKey(nome)) {
+            return false; // Utente già esistente
+        }
+        Utente nuovoUtente = new Utente(nome, password, 1000, 100);
+        utenti.put(nome, nuovoUtente);
+        salvaDatiSuFile("dati_banca.dat"); // Salva automaticamente l'utente
+        return true;
+    }
 }
 
