@@ -60,11 +60,20 @@ public class InvestimentoFrame extends JFrame {
         try {
             double importo = Double.parseDouble(input);
             if (importo > 0 && importo <= conto.getSaldoBanca()) {
-                double guadagno = importo * rendimento;
-                conto.preleva(importo);
-                conto.guadagnoInvestimento(guadagno);
+                double risultatoInvestimento = importo * rendimento - importo;
+                conto.preleva(importo,true);
+                
+                if (risultatoInvestimento > 0) {
+                    conto.deposita(risultatoInvestimento); // Aggiunge il guadagno alla banca, non al portafoglio
+                    JOptionPane.showMessageDialog(this, "🎉 Investimento completato! Guadagno: " + risultatoInvestimento, "Successo", JOptionPane.INFORMATION_MESSAGE);
+                } else if (risultatoInvestimento < 0) {
+                    // Se c'è una perdita, il denaro è già stato prelevato, quindi nessuna azione necessaria
+                    JOptionPane.showMessageDialog(this, "😢 Mi dispiace, hai perso " + (-risultatoInvestimento) + " nel tuo investimento.", "Perdita", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "⚖️ Hai pareggiato, nessun guadagno né perdita.", "Neutro", JOptionPane.WARNING_MESSAGE);
+                }
+                
                 GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
-                JOptionPane.showMessageDialog(this, "🎉 Investimento completato! Guadagno: " + guadagno, "Successo", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "⚠️ Importo non valido o saldo insufficiente!", "Errore", JOptionPane.ERROR_MESSAGE);
             }

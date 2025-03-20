@@ -7,7 +7,7 @@ import java.util.Vector;
 class ContoBancario implements Serializable{
     private double saldoBanca;
     private double saldoPortafoglio;
-     private Vector<String> storicoTransazioni;
+    private Vector<String> storicoTransazioni;
 
     public ContoBancario(double saldoBanca, double saldoPortafoglio) {
         this.saldoBanca = saldoBanca;
@@ -29,18 +29,24 @@ class ContoBancario implements Serializable{
 
     public void guadagnoInvestimento(double guadagno) {
         if (guadagno > 0) {
-            saldoPortafoglio += guadagno;
-            System.out.println("Guadagno accreditato nel portafoglio. Nuovo saldo: " + saldoPortafoglio);
-            deposita(guadagno);
+            saldoBanca += guadagno; // Guadagno va direttamente in banca
+            storicoTransazioni.add("Guadagno investimento: " + guadagno);
+            System.out.println("Guadagno accreditato in banca. Nuovo saldo banca: " + saldoBanca);
+        } else if (guadagno < 0) {
+            saldoBanca += guadagno; // Perdita viene sottratta dalla banca
+            storicoTransazioni.add("Perdita investimento: " + guadagno);
+            System.out.println("Perdita applicata in banca. Nuovo saldo banca: " + saldoBanca);
         }
     }
 
-    public boolean preleva(double importo) {
+    public boolean preleva(double importo, boolean perInvestimento) {
         if (importo > 0 && importo <= saldoBanca) {
             saldoBanca -= importo;
-            saldoPortafoglio += importo;
-            storicoTransazioni.add("Prelievo di " + importo);
-            System.out.println("Prelievo effettuato. Nuovo saldo: " + saldoBanca);
+            if (!perInvestimento) {
+                saldoPortafoglio += importo; // Aggiunge al portafoglio solo se non è un investimento
+            }
+            storicoTransazioni.add("Prelievo di " + importo + (perInvestimento ? " per investimento" : ""));
+            System.out.println("Prelievo effettuato. Nuovo saldo banca: " + saldoBanca);
             return true;
         } else {
             System.out.println("Saldo insufficiente o importo non valido.");
