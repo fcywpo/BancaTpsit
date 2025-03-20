@@ -54,26 +54,27 @@ public class InvestimentoFrame extends JFrame {
         return button;
     }
 
-    private void investi(double rendimento) {
+private void investi(double rendimento) {
         ContoBancario conto = GestioneUtenti.getUtenteAutenticato().getConto();
         String input = JOptionPane.showInputDialog(this, "💰 Inserisci l'importo da investire:");
         try {
             double importo = Double.parseDouble(input);
             if (importo > 0 && importo <= conto.getSaldoBanca()) {
-                double risultatoInvestimento = importo * rendimento - importo;
-                conto.preleva(importo,true);
-                
-                if (risultatoInvestimento > 0) {
-                    conto.deposita(risultatoInvestimento); // Aggiunge il guadagno alla banca, non al portafoglio
-                    JOptionPane.showMessageDialog(this, "🎉 Investimento completato! Guadagno: " + risultatoInvestimento, "Successo", JOptionPane.INFORMATION_MESSAGE);
-                } else if (risultatoInvestimento < 0) {
-                    // Se c'è una perdita, il denaro è già stato prelevato, quindi nessuna azione necessaria
-                    JOptionPane.showMessageDialog(this, "😢 Mi dispiace, hai perso " + (-risultatoInvestimento) + " nel tuo investimento.", "Perdita", JOptionPane.ERROR_MESSAGE);
+                double risultatoInvestimento = importo * rendimento;
+
+                conto.preleva(importo, true);  // Preleva l'investimento
+                GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
+
+                if (risultatoInvestimento > importo) {
+                    double guadagno = risultatoInvestimento - importo;
+                    conto.deposita(guadagno);
+                    JOptionPane.showMessageDialog(this, "🎉 Investimento completato! Guadagno: " + guadagno, "Successo", JOptionPane.INFORMATION_MESSAGE);
+                } else if (risultatoInvestimento < importo) {
+                    double perdita = importo - risultatoInvestimento;
+                    JOptionPane.showMessageDialog(this, "😢 Mi dispiace, hai perso " + perdita + " nel tuo investimento.", "Perdita", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "⚖️ Hai pareggiato, nessun guadagno né perdita.", "Neutro", JOptionPane.WARNING_MESSAGE);
                 }
-                
-                GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
             } else {
                 JOptionPane.showMessageDialog(this, "⚠️ Importo non valido o saldo insufficiente!", "Errore", JOptionPane.ERROR_MESSAGE);
             }
@@ -81,4 +82,5 @@ public class InvestimentoFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 }

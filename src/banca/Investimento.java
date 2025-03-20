@@ -8,10 +8,11 @@ class Investimento {
     private Random random = new Random();
     private Scanner scanner = new Scanner(System.in);
 
-    public double calcolaRendimento(double importo, int durata, int rischio) {
-        double fattore = 1 + (rischio / 100.0) * random.nextDouble();
+   public double calcolaRendimento(double importo, int durata, int rischio) {
+       double fattore = 1 + (rischio / 100.0) * random.nextDouble();
         return importo * Math.pow(fattore, durata);
     }
+
 
     public void avviaInvestimento(ContoBancario conto) {
         double soldiDaInvestire = 0;
@@ -46,6 +47,7 @@ class Investimento {
 
         double rendimento = calcolaRendimento(soldiDaInvestire, durataInvestimento, rischioInvestimento * 10);
         double guadagno = rendimento - soldiDaInvestire;
+
 
         System.out.println("Investimento completato! Guadagno: " + guadagno);
 
