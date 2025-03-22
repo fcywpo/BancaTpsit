@@ -64,7 +64,7 @@ public class InvestimentoFrame extends JFrame {
   }
 
   private void chiediDurata(int rischioInvestimento) {
-    String[] opzioni = {"3 mesi", "6 mesi", "12 mesi"};
+    String[] opzioni = {"3 mesi", "6 mesi", "9 mesi"};
     int scelta =
         JOptionPane.showOptionDialog(
             this,
@@ -113,7 +113,7 @@ public class InvestimentoFrame extends JFrame {
         if (numeroCasuale <= sogliaVittoria) {
           double rendimento = GeneraRandom(maxRend, minRend);
           risultatoInvestimento = importo + (importo * rendimento / 100) * moltiplicatore;
-          conto.deposita(risultatoInvestimento - importo);
+          conto.deposita(risultatoInvestimento - importo, true);
           JOptionPane.showMessageDialog(
               this,
               "🎉 Guadagno: " + (risultatoInvestimento - importo),
@@ -130,6 +130,7 @@ public class InvestimentoFrame extends JFrame {
         }
 
         conto.avanzaMesi(mesi);
+        GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
       } else {
         JOptionPane.showMessageDialog(
             this,

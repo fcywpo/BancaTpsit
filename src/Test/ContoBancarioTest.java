@@ -9,7 +9,7 @@ class ContoBancarioTest {
   @Test
   void testDeposita() {
     ContoBancario conto = new ContoBancario(100, 50);
-    conto.deposita(30);
+    conto.deposita(30, false);
 
     assertEquals(130, conto.getSaldoBanca(), "Il saldo deve essere aumentato a 130 euro");
     assertEquals(20, conto.getSaldoBanca(), "Il saldo deve essere diminuito a 20 euro");

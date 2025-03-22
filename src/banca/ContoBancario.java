@@ -15,14 +15,18 @@ public class ContoBancario implements Serializable {
     this.storicoTransazioni = new Vector<>();
   }
 
-  public void deposita(double importo) {
+  public void deposita(double importo, boolean daInvestimento) {
     if (importo > 0 && importo <= saldoPortafoglio) {
       saldoBanca += importo;
-      saldoPortafoglio -= importo;
-      storicoTransazioni.add("Deposito di " + importo);
+      if (!daInvestimento) {
+        saldoPortafoglio -= importo;
+      }
+      storicoTransazioni.add(
+          "Deposito di " + importo + (daInvestimento ? " per investimento" : ""));
       System.out.println("Deposito effettuato. Nuovo saldo banca: " + saldoBanca);
       System.out.println("Saldo portafoglio rimanente: " + saldoPortafoglio);
       GestioneUtenti.esportaDatiCSV("data.csv");
+      GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
     } else {
       System.out.println("Importo non valido o fondi insufficienti nel portafoglio.");
     }
@@ -39,6 +43,7 @@ public class ContoBancario implements Serializable {
       System.out.println("Perdita applicata in banca. Nuovo saldo banca: " + saldoBanca);
     }
     GestioneUtenti.esportaDatiCSV("data.csv");
+    GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
   }
 
   public boolean preleva(double importo, boolean perInvestimento) {
@@ -51,6 +56,7 @@ public class ContoBancario implements Serializable {
           "Prelievo di " + importo + (perInvestimento ? " per investimento" : ""));
       System.out.println("Prelievo effettuato. Nuovo saldo banca: " + saldoBanca);
       GestioneUtenti.esportaDatiCSV("data.csv");
+      GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
       return true;
     } else {
       System.out.println("Saldo insufficiente o importo non valido.");
@@ -68,6 +74,7 @@ public class ContoBancario implements Serializable {
       saldoPortafoglio += mesi * 100;
       System.out.println("Sono passati " + mesi + " mesi. Nuovo saldo: " + saldoPortafoglio);
       GestioneUtenti.esportaDatiCSV("data.csv");
+      GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
     } else {
       System.out.println("Numero di mesi non valido.");
     }

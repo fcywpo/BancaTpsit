@@ -102,7 +102,7 @@ public class MainFrame extends JFrame {
     String input = JOptionPane.showInputDialog(this, "💰 Importo da depositare:");
     try {
       double importo = Double.parseDouble(input);
-      conto.deposita(importo);
+      conto.deposita(importo, false);
       GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
       JOptionPane.showMessageDialog(
           this, "✅ Deposito effettuato con successo!", "Successo", JOptionPane.INFORMATION_MESSAGE);

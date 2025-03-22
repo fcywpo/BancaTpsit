@@ -93,6 +93,7 @@ public class Investimento {
         break;
     }
 
+    guadagno = Math.round(guadagno * 100) / 100.0;
     System.out.println("Guadagno calcolato: " + guadagno); // Debug
     System.out.println("Investimento completato! Guadagno: " + guadagno);
     conto.guadagnoInvestimento(guadagno);
