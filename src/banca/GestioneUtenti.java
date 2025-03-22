@@ -2,9 +2,11 @@ package banca;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -53,6 +55,7 @@ public class GestioneUtenti {
   public static void logout() {
     if (utenteAutenticato != null) {
       System.out.println("Logout effettuato per " + utenteAutenticato.getNome());
+      GestioneUtenti.esportaDatiCSV("data.csv");
       utenteAutenticato = null;
     } else {
       System.out.println("Nessun utente è attualmente loggato.");
@@ -101,5 +104,27 @@ public class GestioneUtenti {
     utenti.put(nome, nuovoUtente);
     salvaDatiSuFile("dati_banca.dat"); // Salva automaticamente l'utente
     return true;
+  }
+
+  public static void esportaDatiCSV(String nomeFile) {
+    try (FileWriter writer =
+        new FileWriter(nomeFile, true)) { // true -> Append per non sovrascrivere
+      for (Utente utente : utenti.values()) {
+        ContoBancario conto = utente.getConto();
+        long timestamp = Instant.now().getEpochSecond(); // Timestamp UNIX
+        writer.write(
+            utente.getNome()
+                + ";"
+                + timestamp
+                + ";"
+                + conto.getSaldoBanca()
+                + ";"
+                + conto.getSaldoPortafoglio()
+                + "\n");
+      }
+      System.out.println("Dati esportati con successo in " + nomeFile);
+    } catch (IOException e) {
+      System.out.println("Errore durante l'esportazione.");
+    }
   }
 }

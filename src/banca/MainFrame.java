@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
     @SuppressWarnings("unused")
     JButton avanzaMesiButton = createStyledButton("⏩ Avanza Mesi", ignored -> avanzaMesi());
     @SuppressWarnings("unused")
-    JButton graficoButton = createStyledButton("📊 Visualizza Grafico", ignored -> mostraGrafico());
+    JButton exportButton = createStyledButton("📂 Esporta Dati", ignored -> esportaDati());
     @SuppressWarnings("unused")
     JButton logoutButton =
         createStyledButton(
@@ -64,7 +64,7 @@ public class MainFrame extends JFrame {
     container.add(Box.createVerticalStrut(10));
     container.add(avanzaMesiButton);
     container.add(Box.createVerticalStrut(10));
-    container.add(graficoButton);
+    container.add(exportButton);
     container.add(Box.createVerticalStrut(10));
     container.add(logoutButton);
 
@@ -165,10 +165,9 @@ public class MainFrame extends JFrame {
         JOptionPane.INFORMATION_MESSAGE);
   }
 
-  private void mostraGrafico() {
-    ContoBancario conto = GestioneUtenti.getUtenteAutenticato().getConto();
-    new VisualizzaGrafico(
-            conto.getStoricoTransazioni(), conto.getSaldoBanca(), conto.getSaldoPortafoglio())
-        .setVisible(true);
+  private void esportaDati() {
+    GestioneUtenti.esportaDatiCSV("data.csv");
+    JOptionPane.showMessageDialog(
+        this, "📂 Dati esportati con successo!", "Esportazione", JOptionPane.INFORMATION_MESSAGE);
   }
 }

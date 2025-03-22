@@ -22,6 +22,7 @@ public class ContoBancario implements Serializable {
       storicoTransazioni.add("Deposito di " + importo);
       System.out.println("Deposito effettuato. Nuovo saldo banca: " + saldoBanca);
       System.out.println("Saldo portafoglio rimanente: " + saldoPortafoglio);
+      GestioneUtenti.esportaDatiCSV("data.csv");
     } else {
       System.out.println("Importo non valido o fondi insufficienti nel portafoglio.");
     }
@@ -37,6 +38,7 @@ public class ContoBancario implements Serializable {
       storicoTransazioni.add("Perdita investimento: " + guadagno);
       System.out.println("Perdita applicata in banca. Nuovo saldo banca: " + saldoBanca);
     }
+    GestioneUtenti.esportaDatiCSV("data.csv");
   }
 
   public boolean preleva(double importo, boolean perInvestimento) {
@@ -48,6 +50,7 @@ public class ContoBancario implements Serializable {
       storicoTransazioni.add(
           "Prelievo di " + importo + (perInvestimento ? " per investimento" : ""));
       System.out.println("Prelievo effettuato. Nuovo saldo banca: " + saldoBanca);
+      GestioneUtenti.esportaDatiCSV("data.csv");
       return true;
     } else {
       System.out.println("Saldo insufficiente o importo non valido.");
@@ -64,6 +67,7 @@ public class ContoBancario implements Serializable {
     if (mesi > 0) {
       saldoPortafoglio += mesi * 100;
       System.out.println("Sono passati " + mesi + " mesi. Nuovo saldo: " + saldoPortafoglio);
+      GestioneUtenti.esportaDatiCSV("data.csv");
     } else {
       System.out.println("Numero di mesi non valido.");
     }
