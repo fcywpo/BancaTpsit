@@ -1,26 +1,38 @@
-# BANCA
-## Sistema di Gestione Bancaria (Monoutente)
+# ITIS_Maven_Example
+A HelloWorld example that uses maven to handle the log4j dependency.
 
-## Autori:
-- alvise sacconato
-- alessandro zago
+This repository has been created for a course I'm teaching at ITTS Vito Volterra (TPSIT for the classes 5A and 5B).
 
-## Versione: 1.1
+## How to use
 
-## Panoramica
-- Questo programma simula un sistema bancario monoutente, permettendo all'utente di gestire un conto bancario con diverse funzionalità, tra cui prelievo, deposito e opzioni di investimento. Gli investimenti sono disponibili in tre durate diverse: breve termine, medio termine e lungo termine. Inoltre, il sistema offre tre livelli di rischio per gli investimenti: basso rischio/basso guadagno, rischio medio/guadagno medio e alto rischio/alto guadagno.
-- L'utente può anche avanzare nel tempo (in mesi) e visualizzare i dettagli del conto corrente in qualsiasi momento.
+1. Clone the repository (use git clone or an IDE of your choice to clone)
+2. Install maven (follow the slide and the tutorial)
+3. Build the project and run it.
 
-## Fuzionalità
-- Prelievo: Permette all'utente di prelevare denaro dal conto.
+## log4j2
 
-- Deposito: Permette all'utente di depositare denaro sul conto.
+I've chosen log4j as a library to install and use, because logging will be a fundamental part of the project (don't use sysout)
 
-- Investimenti: L'utente può investire in diversi tipi di investimenti con durate e livelli di rischio variabili
+Logs work in level, these are the most important:
+1. DEBUG
+2. INFO
+3. WARN
+4. ERROR
 
-- Avanzamento del tempo: L'utente può avanzare nel tempo di mese in mese per simulare il passare del tempo per gli investimenti.
+If we set the project log level to "DEBUG" it will enable all the logs from DEBUG onward (DEBUG, INFO, WARN, ERROR)
 
-- Informazioni sul conto: Visualizza i dettagli sul saldo del conto corrente, gli investimenti e la cronologia delle transazioni.
+If we set the project log level to "INFO" it will enable all the logs from INFO onward (INFO, WARN, ERROR)
 
-## LICENZA
-- sourcecode free
+If we set the project log level to "WARN" it will enable all the logs from WARN onward (WARN, ERROR)
+
+If we set the project log level to "ERROR" it will enable all the logs from ERROR onward (ERROR)
+
+This means that we can write code like
+```java
+logger.debug("This is a debug message!");
+logger.info("This is an info message!");
+logger.warn("This is a warning message!");
+logger.error("This is an error message!");
+```
+
+and change in runtime the log level to hide specific messages (or show them).

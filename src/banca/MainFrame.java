@@ -2,13 +2,13 @@ package banca;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class MainFrame extends JFrame {
     public MainFrame(String user) {
         setTitle("🏦 Banking App - " + user);
-        setSize(350, 600);
+        setSize(450, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
         JButton investimentoButton = createStyledButton("📈 Investi", e -> apriFinestraInvestimenti());
         JButton storicoButton = createStyledButton("📜 Storico Transazioni", e -> visualizzaStorico());
         JButton avanzaMesiButton = createStyledButton("⏩ Avanza Mesi", e -> avanzaMesi());
+        JButton graficoButton = createStyledButton("📊 Visualizza Grafico", e -> mostraGrafico()); 
         JButton logoutButton = createStyledButton("🚪 Logout", e -> {
             GestioneUtenti.logout();
             new LoginFrame();
@@ -50,6 +51,8 @@ public class MainFrame extends JFrame {
         container.add(storicoButton);
         container.add(Box.createVerticalStrut(10));
         container.add(avanzaMesiButton);
+        container.add(Box.createVerticalStrut(10));
+        container.add(graficoButton);
         container.add(Box.createVerticalStrut(10));
         container.add(logoutButton);
 
@@ -125,4 +128,9 @@ public class MainFrame extends JFrame {
         ContoBancario conto = GestioneUtenti.getUtenteAutenticato().getConto();
         JOptionPane.showMessageDialog(this, "📜 Storico Transazioni:\n" + String.join("\n", conto.getStoricoTransazioni()), "Storico", JOptionPane.INFORMATION_MESSAGE);
     }
+    private void mostraGrafico() {
+        ContoBancario conto = GestioneUtenti.getUtenteAutenticato().getConto();
+        new VisualizzaGrafico(conto.getStoricoTransazioni(), conto.getSaldoBanca(), conto.getSaldoPortafoglio()).setVisible(true);
+    }
+    
 }

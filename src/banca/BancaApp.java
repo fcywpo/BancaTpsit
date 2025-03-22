@@ -2,9 +2,6 @@ package banca;
 
 // Classe principale
 
-import java.util.Scanner;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 
 public class BancaApp {
