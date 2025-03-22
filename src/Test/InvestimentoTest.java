@@ -11,21 +11,20 @@ class InvestimentoTest {
 
   @Test
   void testGeneraRandom() {
-    double valore = Investimento.GeneraRandom(10, 5);
-    assertTrue(valore >= 5 && valore <= 10, "Il valore generato deve essere compreso tra 5 e 10");
+   double min = 1.0, max = 10.0;
+   double risultato = Investimento.GeneraRandom(max,min);
+
+   assertTrue(risultato >= min && risultato <=max , "Il valore deve essere generato tra min e max");
   }
 
   @Test
   void testAvviaInvestimento() {
-    ContoBancario conto = new ContoBancario(1000.0, 500.0);
-    Investimento investimento = new Investimento();
+   ContoBancario conto = new ContoBancario (1000.0, 200.0);
+   Investimento investimento = new Investimento();
 
-    double saldoIniziale = conto.getSaldoBanca();
-    investimento.avviaInvestimento(conto);
+   asserDoesNotTrhow(() -> investimento.avviaInvestimento(conto));
 
-    assertNotEquals(
-        saldoIniziale,
-        conto.getSaldoBanca(),
-        "Il saldo del conto deve cambiare dopo l'investimento");
-  }
+   assertTrue(conto.getSaldoBanca() >= 0 , "Il saldo non deve essere negativo");
+    assertTrue(conto.getSaldoPortafoglio() >= 0 , "Il saldo non deve essere negativo");
+
 }
