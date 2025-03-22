@@ -10,12 +10,13 @@ public class VisualizzaGrafico extends JFrame {
     private List<String> timestamps;
     private List<Double> saldoTotale;
 
-    public VisualizzaGrafico(List<String> storicoTransazioni, double saldoInizialeBanca, double saldoInizialePortafoglio) {
+    public VisualizzaGrafico(List<String> storicoTransazioni, double saldoInizialeBanca,
+            double saldoInizialePortafoglio) {
         this.timestamps = new ArrayList<>();
         this.saldoTotale = new ArrayList<>();
-        
+
         parseStorico(storicoTransazioni, saldoInizialeBanca + saldoInizialePortafoglio);
-        
+
         setTitle("Money Changes Over Time");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -26,17 +27,17 @@ public class VisualizzaGrafico extends JFrame {
         timestamps.add("Start");
         saldoTotale.add(saldoTotaleIniziale);
         double saldoAttuale = saldoTotaleIniziale;
-        
+
         for (String transazione : storico) {
             timestamps.add(transazione);
-            
+
             double variazione = extractImporto(transazione);
             if (transazione.contains("Deposito di") || transazione.contains("Guadagno investimento")) {
                 saldoAttuale += variazione;
             } else if (transazione.contains("Prelievo di") || transazione.contains("Perdita investimento")) {
                 saldoAttuale -= variazione;
             }
-            
+
             saldoTotale.add(saldoAttuale);
         }
     }
@@ -64,12 +65,13 @@ public class VisualizzaGrafico extends JFrame {
 
         g2d.drawLine(padding, height - padding, width - padding, height - padding);
         g2d.drawLine(padding, padding, padding, height - padding);
-        
+
         g2d.setFont(new Font("SansSerif", Font.PLAIN, 12));
         g2d.drawString("Transazioni", width / 2 - 30, height - 10);
         g2d.drawString("Saldo", 10, height / 2);
 
-        if (timestamps.isEmpty()) return;
+        if (timestamps.isEmpty())
+            return;
 
         int pointCount = timestamps.size();
         int stepX = Math.max(1, graphWidth / (pointCount - 1));
@@ -88,7 +90,7 @@ public class VisualizzaGrafico extends JFrame {
             g2d.setColor(Color.BLUE);
             g2d.drawLine(lastX, lastY, x, y);
             g2d.fillOval(x - 3, y - 3, 6, 6);
-            
+
             g2d.setColor(Color.BLACK);
             g2d.drawString(String.valueOf(saldoTotale.get(i)), x - 10, y - 10);
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Vector;
 
 // Classe per la gestione del conto bancario
-class ContoBancario implements Serializable{
+class ContoBancario implements Serializable {
     private double saldoBanca;
     private double saldoPortafoglio;
     private Vector<String> storicoTransazioni;
@@ -16,9 +16,9 @@ class ContoBancario implements Serializable{
     }
 
     public void deposita(double importo) {
-        if (importo > 0 && importo <= saldoPortafoglio) { 
+        if (importo > 0 && importo <= saldoPortafoglio) {
             saldoBanca += importo;
-            saldoPortafoglio -= importo; 
+            saldoPortafoglio -= importo;
             storicoTransazioni.add("Deposito di " + importo);
             System.out.println("Deposito effettuato. Nuovo saldo banca: " + saldoBanca);
             System.out.println("Saldo portafoglio rimanente: " + saldoPortafoglio);
@@ -77,9 +77,11 @@ class ContoBancario implements Serializable{
     public double getSaldoBanca() {
         return this.saldoBanca;
     }
+
     public double getSaldoPortafoglio() {
         return this.saldoPortafoglio;
     }
+
     public Vector<String> getStoricoTransazioni() {
         return storicoTransazioni;
     }

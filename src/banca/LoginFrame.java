@@ -27,12 +27,12 @@ public class LoginFrame extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         container.add(titleLabel);
-        
+
         container.add(Box.createVerticalStrut(30)); // Spazio
 
         userField = createStyledField("", "👤 Username");
         passField = createStyledPasswordField("", "🔒 Password");
-        
+
         container.add(userField);
         container.add(Box.createVerticalStrut(20));
         container.add(passField);
@@ -40,7 +40,7 @@ public class LoginFrame extends JFrame {
 
         JButton loginButton = createStyledButton("✅ Accedi", e -> login());
         JButton registerButton = createStyledButton("🆕 Registrati", e -> new RegisterFrame());
-        
+
         container.add(loginButton);
         container.add(Box.createVerticalStrut(10));
         container.add(registerButton);
@@ -71,6 +71,7 @@ public class LoginFrame extends JFrame {
                     field.setForeground(Color.WHITE);
                 }
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getText().isEmpty()) {
                     field.setText(placeholder);
@@ -100,6 +101,7 @@ public class LoginFrame extends JFrame {
                     field.setEchoChar('●');
                 }
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getPassword().length == 0) {
                     field.setText(placeholder);
@@ -130,7 +132,8 @@ public class LoginFrame extends JFrame {
 
         if (GestioneUtenti.login(user, pass)) {
             statusLabel.setText("✅ Accesso riuscito!");
-            JOptionPane.showMessageDialog(this, "🎉 Benvenuto, " + user + "!", "Login Successo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "🎉 Benvenuto, " + user + "!", "Login Successo",
+                    JOptionPane.INFORMATION_MESSAGE);
             new MainFrame(user);
             dispose();
         } else {

@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         container.add(titleLabel);
-        
+
         container.add(Box.createVerticalStrut(30));
 
         JButton saldoButton = createStyledButton("💰 Mostra Saldo", e -> mostraSaldo());
@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
         JButton investimentoButton = createStyledButton("📈 Investi", e -> apriFinestraInvestimenti());
         JButton storicoButton = createStyledButton("📜 Storico Transazioni", e -> visualizzaStorico());
         JButton avanzaMesiButton = createStyledButton("⏩ Avanza Mesi", e -> avanzaMesi());
-        JButton graficoButton = createStyledButton("📊 Visualizza Grafico", e -> mostraGrafico()); 
+        JButton graficoButton = createStyledButton("📊 Visualizza Grafico", e -> mostraGrafico());
         JButton logoutButton = createStyledButton("🚪 Logout", e -> {
             GestioneUtenti.logout();
             new LoginFrame();
@@ -75,7 +75,9 @@ public class MainFrame extends JFrame {
 
     private void mostraSaldo() {
         ContoBancario conto = GestioneUtenti.getUtenteAutenticato().getConto();
-        JOptionPane.showMessageDialog(this, "🏦 Saldo Banca: " + conto.getSaldoBanca() + "\n💵 Saldo Portafoglio: " + conto.getSaldoPortafoglio(), "Saldo", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,
+                "🏦 Saldo Banca: " + conto.getSaldoBanca() + "\n💵 Saldo Portafoglio: " + conto.getSaldoPortafoglio(),
+                "Saldo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void deposita() {
@@ -85,9 +87,11 @@ public class MainFrame extends JFrame {
             double importo = Double.parseDouble(input);
             conto.deposita(importo);
             GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
-            JOptionPane.showMessageDialog(this, "✅ Deposito effettuato con successo!", "Successo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "✅ Deposito effettuato con successo!", "Successo",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -98,12 +102,14 @@ public class MainFrame extends JFrame {
             double importo = Double.parseDouble(input);
             if (conto.preleva(importo, false)) {
                 GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
-                JOptionPane.showMessageDialog(this, "✅ Prelievo effettuato con successo!", "Successo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "✅ Prelievo effettuato con successo!", "Successo",
+                        JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "⚠️ Saldo insufficiente!", "Errore", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -114,9 +120,11 @@ public class MainFrame extends JFrame {
             int mesi = Integer.parseInt(input);
             conto.avanzaMesi(mesi);
             GestioneUtenti.salvaDatiSuFile("dati_banca.dat");
-            JOptionPane.showMessageDialog(this, "✅ Sono passati " + mesi + " mesi. Nuovo saldo aggiornato!", "Avanzamento Tempo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "✅ Sono passati " + mesi + " mesi. Nuovo saldo aggiornato!",
+                    "Avanzamento Tempo", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -126,11 +134,15 @@ public class MainFrame extends JFrame {
 
     private void visualizzaStorico() {
         ContoBancario conto = GestioneUtenti.getUtenteAutenticato().getConto();
-        JOptionPane.showMessageDialog(this, "📜 Storico Transazioni:\n" + String.join("\n", conto.getStoricoTransazioni()), "Storico", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this,
+                "📜 Storico Transazioni:\n" + String.join("\n", conto.getStoricoTransazioni()), "Storico",
+                JOptionPane.INFORMATION_MESSAGE);
     }
+
     private void mostraGrafico() {
         ContoBancario conto = GestioneUtenti.getUtenteAutenticato().getConto();
-        new VisualizzaGrafico(conto.getStoricoTransazioni(), conto.getSaldoBanca(), conto.getSaldoPortafoglio()).setVisible(true);
+        new VisualizzaGrafico(conto.getStoricoTransazioni(), conto.getSaldoBanca(), conto.getSaldoPortafoglio())
+                .setVisible(true);
     }
-    
+
 }

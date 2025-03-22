@@ -8,7 +8,7 @@ class Utente implements Serializable {
     private String password;
     private ContoBancario conto;
 
-    public Utente(String nome, String password,double saldoBanca, double saldoPortafoglio) {
+    public Utente(String nome, String password, double saldoBanca, double saldoPortafoglio) {
         this.nome = nome;
         this.password = password;
         this.conto = new ContoBancario(saldoBanca, saldoPortafoglio);
@@ -21,7 +21,7 @@ class Utente implements Serializable {
     public String getNome() {
         return nome;
     }
-    
+
     public ContoBancario getConto() {
         return conto;
     }

@@ -8,8 +8,7 @@ import java.util.InputMismatchException;
 class Menu {
     private static Scanner scanner = new Scanner(System.in);
 
-     
-     public static short menuIniziale() {
+    public static short menuIniziale() {
         System.out.println("\n--- Menu Iniziale ---");
         System.out.println("1. Registrati");
         System.out.println("2. Accedi");
@@ -19,7 +18,8 @@ class Menu {
     }
 
     public static short menuBanca() {
-        System.out.println("1. Deposita\n2. Preleva\n3. Mostra Saldo\n4. Avanza di X mesi\n5.Fai un investimento\n6. Storico transazioni\n0. logout");
+        System.out.println(
+                "1. Deposita\n2. Preleva\n3. Mostra Saldo\n4. Avanza di X mesi\n5.Fai un investimento\n6. Storico transazioni\n0. logout");
         return getShortInput();
     }
 

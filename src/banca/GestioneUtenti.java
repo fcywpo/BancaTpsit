@@ -82,6 +82,7 @@ public class GestioneUtenti {
             System.out.println("Nessun dato precedente trovato, avvio con nuova banca.");
         }
     }
+
     public static boolean login(String nome, String password) {
         Utente utente = utenti.get(nome);
         if (utente != null && utente.verificaPassword(password)) {
@@ -90,6 +91,7 @@ public class GestioneUtenti {
         }
         return false;
     }
+
     public static boolean registraUtente(String nome, String password) {
         if (utenti.containsKey(nome)) {
             return false; // Utente già esistente
@@ -100,4 +102,3 @@ public class GestioneUtenti {
         return true;
     }
 }
-

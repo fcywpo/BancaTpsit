@@ -60,7 +60,7 @@ public class InvestimentoFrame extends JFrame {
     }
 
     private void chiediDurata(int rischioInvestimento) {
-        String[] opzioni = {"3 mesi", "6 mesi", "12 mesi"};
+        String[] opzioni = { "3 mesi", "6 mesi", "12 mesi" };
         int scelta = JOptionPane.showOptionDialog(this, "Seleziona la durata dell'investimento:", "Durata",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opzioni, opzioni[0]);
         if (scelta >= 0) {
@@ -81,28 +81,45 @@ public class InvestimentoFrame extends JFrame {
                 double minRend = 0, maxRend = 0, sogliaVittoria = 0;
 
                 switch (rischioInvestimento) {
-                    case 1: minRend = 1; maxRend = 25; sogliaVittoria = 8; break;
-                    case 2: minRend = 15; maxRend = 50; sogliaVittoria = 5; break;
-                    case 3: minRend = 40; maxRend = 100; sogliaVittoria = 2; break;
+                    case 1:
+                        minRend = 1;
+                        maxRend = 25;
+                        sogliaVittoria = 8;
+                        break;
+                    case 2:
+                        minRend = 15;
+                        maxRend = 50;
+                        sogliaVittoria = 5;
+                        break;
+                    case 3:
+                        minRend = 40;
+                        maxRend = 100;
+                        sogliaVittoria = 2;
+                        break;
                 }
 
                 if (numeroCasuale <= sogliaVittoria) {
                     double rendimento = GeneraRandom(maxRend, minRend);
                     risultatoInvestimento = importo + (importo * rendimento / 100) * moltiplicatore;
                     conto.deposita(risultatoInvestimento - importo);
-                    JOptionPane.showMessageDialog(this, "🎉 Guadagno: " + (risultatoInvestimento - importo), "Successo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "🎉 Guadagno: " + (risultatoInvestimento - importo), "Successo",
+                            JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     risultatoInvestimento = -importo * moltiplicatore;
                     conto.preleva(importo, true);
-                    JOptionPane.showMessageDialog(this, "😢 Hai perso " + (importo * moltiplicatore) + " nel tuo investimento.", "Perdita", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this,
+                            "😢 Hai perso " + (importo * moltiplicatore) + " nel tuo investimento.", "Perdita",
+                            JOptionPane.ERROR_MESSAGE);
                 }
 
                 conto.avanzaMesi(mesi);
             } else {
-                JOptionPane.showMessageDialog(this, "⚠️ Importo non valido o saldo insufficiente!", "Errore", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "⚠️ Importo non valido o saldo insufficiente!", "Errore",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "❌ Errore: Inserire un numero valido.", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 

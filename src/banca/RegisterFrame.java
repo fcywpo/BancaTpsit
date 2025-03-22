@@ -27,21 +27,21 @@ public class RegisterFrame extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         container.add(titleLabel);
-        
+
         container.add(Box.createVerticalStrut(30));
 
         userField = createStyledField("", "👤 Username");
         passField = createStyledPasswordField("", "🔒 Password");
-        
+
         container.add(userField);
         container.add(Box.createVerticalStrut(20));
         container.add(passField);
         container.add(Box.createVerticalStrut(30));
 
         JButton registerButton = createStyledButton("✅ Registrati", e -> register());
-        
+
         container.add(registerButton);
-        
+
         statusLabel = new JLabel("", SwingConstants.CENTER);
         statusLabel.setForeground(Color.WHITE);
         container.add(Box.createVerticalStrut(20));
@@ -68,6 +68,7 @@ public class RegisterFrame extends JFrame {
                     field.setForeground(Color.WHITE);
                 }
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getText().isEmpty()) {
                     field.setText(placeholder);
@@ -97,6 +98,7 @@ public class RegisterFrame extends JFrame {
                     field.setEchoChar('●');
                 }
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getPassword().length == 0) {
                     field.setText(placeholder);
@@ -127,11 +129,13 @@ public class RegisterFrame extends JFrame {
 
         if (GestioneUtenti.registraUtente(user, pass)) {
             statusLabel.setText("✅ Registrazione completata!");
-            JOptionPane.showMessageDialog(this, "🎉 Account creato con successo!", "Registrazione Successo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "🎉 Account creato con successo!", "Registrazione Successo",
+                    JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } else {
             statusLabel.setText("❌ Errore: utente già esistente!");
-            JOptionPane.showMessageDialog(this, "⚠️ Questo username è già in uso!", "Errore", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "⚠️ Questo username è già in uso!", "Errore",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 }
