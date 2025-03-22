@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Vector;
 
 // Classe per la gestione del conto bancario
-class ContoBancario implements Serializable {
+public class ContoBancario implements Serializable {
   private double saldoBanca;
   private double saldoPortafoglio;
   private Vector<String> storicoTransazioni;

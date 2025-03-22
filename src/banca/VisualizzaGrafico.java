@@ -60,10 +60,20 @@ public class VisualizzaGrafico extends JFrame {
 
     int width = getWidth();
     int height = getHeight();
-    int padding = 50;
+    int padding = 60;
     int graphWidth = width - 2 * padding;
     int graphHeight = height - 2 * padding;
 
+    g2d.setColor(Color.WHITE);
+    g2d.fillRect(0, 0, width, height);
+
+    g2d.setColor(Color.LIGHT_GRAY);
+    for (int i = 1; i <= 5; i++) {
+      int y = height - padding - i * (graphHeight / 5);
+      g2d.drawLine(padding, y, width - padding, y);
+    }
+
+    g2d.setColor(Color.BLACK);
     g2d.drawLine(padding, height - padding, width - padding, height - padding);
     g2d.drawLine(padding, padding, padding, height - padding);
 
@@ -76,8 +86,8 @@ public class VisualizzaGrafico extends JFrame {
     int pointCount = timestamps.size();
     int stepX = Math.max(1, graphWidth / (pointCount - 1));
 
-    double maxY = saldoTotale.stream().max(Double::compare).orElse(1.0);
-    double minY = saldoTotale.stream().min(Double::compare).orElse(0.0);
+    double maxY = saldoTotale.stream().max(Double::compare).orElse(1.0) * 1.1;
+    double minY = saldoTotale.stream().min(Double::compare).orElse(0.0) * 0.9;
     double rangeY = maxY - minY;
 
     int lastX = padding;
@@ -89,10 +99,10 @@ public class VisualizzaGrafico extends JFrame {
 
       g2d.setColor(Color.BLUE);
       g2d.drawLine(lastX, lastY, x, y);
-      g2d.fillOval(x - 3, y - 3, 6, 6);
+      g2d.fillOval(x - 4, y - 4, 8, 8);
 
       g2d.setColor(Color.BLACK);
-      g2d.drawString(String.valueOf(saldoTotale.get(i)), x - 10, y - 10);
+      g2d.drawString(String.format("%.2f", saldoTotale.get(i)), x - 15, y - 10);
 
       lastX = x;
       lastY = y;

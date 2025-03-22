@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 // Classe per la gestione degli investimenti
-class Investimento {
+public class Investimento {
   private Random random = new Random();
   private Scanner scanner = new Scanner(System.in);
 
