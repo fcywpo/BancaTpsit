@@ -1,4 +1,5 @@
 # ITIS_Maven_Example
+
 A HelloWorld example that uses maven to handle the log4j dependency.
 
 This repository has been created for a course I'm teaching at ITTS Vito Volterra (TPSIT for the classes 5A and 5B).
@@ -14,6 +15,7 @@ This repository has been created for a course I'm teaching at ITTS Vito Volterra
 I've chosen log4j as a library to install and use, because logging will be a fundamental part of the project (don't use sysout)
 
 Logs work in level, these are the most important:
+
 1. DEBUG
 2. INFO
 3. WARN
@@ -28,6 +30,7 @@ If we set the project log level to "WARN" it will enable all the logs from WARN 
 If we set the project log level to "ERROR" it will enable all the logs from ERROR onward (ERROR)
 
 This means that we can write code like
+
 ```java
 logger.debug("This is a debug message!");
 logger.info("This is an info message!");
