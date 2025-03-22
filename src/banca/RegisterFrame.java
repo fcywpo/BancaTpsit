@@ -38,7 +38,8 @@ public class RegisterFrame extends JFrame {
         container.add(passField);
         container.add(Box.createVerticalStrut(30));
 
-        JButton registerButton = createStyledButton("✅ Registrati", e -> register());
+        @SuppressWarnings("unused")
+        JButton registerButton = createStyledButton("✅ Registrati", ignored -> register());
 
         container.add(registerButton);
 

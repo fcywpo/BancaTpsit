@@ -29,10 +29,13 @@ public class InvestimentoFrame extends JFrame {
 
         container.add(Box.createVerticalStrut(20));
 
-        JButton bassoRischio = createStyledButton("📉 Basso Rischio (5%)", _ -> chiediDurata(1));
-        JButton medioRischio = createStyledButton("📊 Medio Rischio (10%)", _ -> chiediDurata(2));
-        JButton altoRischio = createStyledButton("🚀 Alto Rischio (20%)", _ -> chiediDurata(3));
-        JButton chiudi = createStyledButton("❌ Chiudi", e -> dispose());
+        @SuppressWarnings("unused")
+        JButton bassoRischio = createStyledButton("📉 Basso Rischio (5%)", ignored -> chiediDurata(1));
+        @SuppressWarnings("unused")
+        JButton medioRischio = createStyledButton("📊 Medio Rischio (10%)", ignored -> chiediDurata(2));
+        @SuppressWarnings("unused")
+        JButton altoRischio = createStyledButton("🚀 Alto Rischio (20%)", ignored -> chiediDurata(3));
+        JButton chiudi = createStyledButton("❌ Chiudi", _ -> dispose());
 
         container.add(bassoRischio);
         container.add(Box.createVerticalStrut(10));

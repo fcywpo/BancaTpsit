@@ -38,8 +38,10 @@ public class LoginFrame extends JFrame {
         container.add(passField);
         container.add(Box.createVerticalStrut(30));
 
-        JButton loginButton = createStyledButton("✅ Accedi", e -> login());
-        JButton registerButton = createStyledButton("🆕 Registrati", e -> new RegisterFrame());
+        @SuppressWarnings("unused")
+        JButton loginButton = createStyledButton("✅ Accedi", ignored -> login());
+        @SuppressWarnings("unused")
+        JButton registerButton = createStyledButton("🆕 Registrati", ignored -> new RegisterFrame());
 
         container.add(loginButton);
         container.add(Box.createVerticalStrut(10));

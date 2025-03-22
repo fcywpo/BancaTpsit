@@ -3,7 +3,6 @@ package banca;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class MainFrame extends JFrame {
     public MainFrame(String user) {
@@ -27,14 +26,22 @@ public class MainFrame extends JFrame {
 
         container.add(Box.createVerticalStrut(30));
 
-        JButton saldoButton = createStyledButton("💰 Mostra Saldo", e -> mostraSaldo());
-        JButton depositoButton = createStyledButton("📥 Deposita", e -> deposita());
-        JButton prelievoButton = createStyledButton("📤 Preleva", e -> preleva());
-        JButton investimentoButton = createStyledButton("📈 Investi", e -> apriFinestraInvestimenti());
-        JButton storicoButton = createStyledButton("📜 Storico Transazioni", e -> visualizzaStorico());
-        JButton avanzaMesiButton = createStyledButton("⏩ Avanza Mesi", e -> avanzaMesi());
-        JButton graficoButton = createStyledButton("📊 Visualizza Grafico", e -> mostraGrafico());
-        JButton logoutButton = createStyledButton("🚪 Logout", e -> {
+        @SuppressWarnings("unused")
+        JButton saldoButton = createStyledButton("💰 Mostra Saldo", ignored -> mostraSaldo());
+        @SuppressWarnings("unused")
+        JButton depositoButton = createStyledButton("📥 Deposita", ignored -> deposita());
+        @SuppressWarnings("unused")
+        JButton prelievoButton = createStyledButton("📤 Preleva", ignored -> preleva());
+        @SuppressWarnings("unused")
+        JButton investimentoButton = createStyledButton("📈 Investi", ignored -> apriFinestraInvestimenti());
+        @SuppressWarnings("unused")
+        JButton storicoButton = createStyledButton("📜 Storico Transazioni", ignored -> visualizzaStorico());
+        @SuppressWarnings("unused")
+        JButton avanzaMesiButton = createStyledButton("⏩ Avanza Mesi", ignored -> avanzaMesi());
+        @SuppressWarnings("unused")
+        JButton graficoButton = createStyledButton("📊 Visualizza Grafico", ignored -> mostraGrafico());
+        @SuppressWarnings("unused")
+        JButton logoutButton = createStyledButton("🚪 Logout", ignored -> {
             GestioneUtenti.logout();
             new LoginFrame();
             dispose();
