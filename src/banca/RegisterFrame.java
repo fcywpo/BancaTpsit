@@ -1,8 +1,8 @@
 package banca;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class RegisterFrame extends JFrame {
   private JTextField userField;

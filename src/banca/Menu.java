@@ -2,8 +2,8 @@ package banca;
 
 // Classe per il menu
 
-import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 // Classe per il menu interattivo
 class Menu {
