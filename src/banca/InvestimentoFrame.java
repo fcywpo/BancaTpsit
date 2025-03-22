@@ -29,9 +29,9 @@ public class InvestimentoFrame extends JFrame {
 
         container.add(Box.createVerticalStrut(20));
 
-        JButton bassoRischio = createStyledButton("📉 Basso Rischio (5%)", e -> chiediDurata(1));
-        JButton medioRischio = createStyledButton("📊 Medio Rischio (10%)", e -> chiediDurata(2));
-        JButton altoRischio = createStyledButton("🚀 Alto Rischio (20%)", e -> chiediDurata(3));
+        JButton bassoRischio = createStyledButton("📉 Basso Rischio (5%)", _ -> chiediDurata(1));
+        JButton medioRischio = createStyledButton("📊 Medio Rischio (10%)", _ -> chiediDurata(2));
+        JButton altoRischio = createStyledButton("🚀 Alto Rischio (20%)", _ -> chiediDurata(3));
         JButton chiudi = createStyledButton("❌ Chiudi", e -> dispose());
 
         container.add(bassoRischio);

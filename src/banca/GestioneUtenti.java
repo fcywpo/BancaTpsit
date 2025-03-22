@@ -73,6 +73,7 @@ public class GestioneUtenti {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void caricaDatiDaFile(String nomeFile) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nomeFile))) {
             utenti = (HashMap<String, Utente>) in.readObject();
