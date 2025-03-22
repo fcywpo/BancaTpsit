@@ -12,4 +12,5 @@ public class BancaApp {
         SwingUtilities.invokeLater(LoginFrame::new);
 
     }
+
 }
