@@ -20,7 +20,13 @@ class Menu {
 
   public static short menuBanca() {
     System.out.println(
-        "1. Deposita\n2. Preleva\n3. Mostra Saldo\n4. Avanza di X mesi\n5.Fai un investimento\n6. Storico transazioni\n0. logout");
+        "1. Deposita\n"
+            + "2. Preleva\n"
+            + "3. Mostra Saldo\n"
+            + "4. Avanza di X mesi\n"
+            + "5.Fai un investimento\n"
+            + "6. Storico transazioni\n"
+            + "0. logout");
     return getShortInput();
   }
 
